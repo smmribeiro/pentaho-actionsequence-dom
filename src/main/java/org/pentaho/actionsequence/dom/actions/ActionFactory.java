@@ -135,8 +135,10 @@ public class ActionFactory {
   }
 
   private static SAXReader createSafeSaxReader() {
-    SAXReader reader = new SAXReader();
+    SAXReader reader = null;
     try {
+      reader = new SAXReader();
+      reader.setFeature( "http://apache.org/xml/features/disallow-doctype-decl", true );
       reader.setFeature( XMLConstants.FEATURE_SECURE_PROCESSING, true );
       reader.setFeature( "http://xml.org/sax/features/external-general-entities", false );
       reader.setFeature( "http://xml.org/sax/features/external-parameter-entities", false );

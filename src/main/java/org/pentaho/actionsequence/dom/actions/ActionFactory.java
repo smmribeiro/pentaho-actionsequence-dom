@@ -85,6 +85,8 @@ public class ActionFactory {
                 }
               }
             }
+          } catch ( SAXException s ) {
+            logger.error( "Failed to create parser:" + s );
           } catch ( Exception e ) {
             logger.error( e );
           }
@@ -134,16 +136,14 @@ public class ActionFactory {
     return pluginActions.get( actionId );
   }
 
-  private static SAXReader createSafeSaxReader() {
+  private static SAXReader createSafeSaxReader() throws SAXException {
     SAXReader reader = new SAXReader();
-    try {
-      reader.setFeature( XMLConstants.FEATURE_SECURE_PROCESSING, true );
-      reader.setFeature( "http://xml.org/sax/features/external-general-entities", false );
-      reader.setFeature( "http://xml.org/sax/features/external-parameter-entities", false );
-      reader.setFeature( "http://apache.org/xml/features/nonvalidating/load-external-dtd", false );
-    } catch ( SAXException e ) {
-      logger.error( e );
-    }
+    reader.setFeature( "http://apache.org/xml/features/disallow-doctype-decl", true );
+    reader.setFeature( XMLConstants.FEATURE_SECURE_PROCESSING, true );
+    reader.setFeature( "http://xml.org/sax/features/external-general-entities", false );
+    reader.setFeature( "http://xml.org/sax/features/external-parameter-entities", false );
+    reader.setFeature( "http://apache.org/xml/features/nonvalidating/load-external-dtd", false );
+
     return reader;
   }
 

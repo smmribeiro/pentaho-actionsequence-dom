@@ -12,7 +12,7 @@
 
   <groupId>org.pentaho</groupId>
   <artifactId>actionsequence-dom</artifactId>
-  <version>11.0.0.0-latest</version>
+  <version>11.0.0.0-SNAPSHOT</version>
 
   <name>Pentaho Action Sequence DOM</name>
   <url>http://www.pentaho.com</url>
